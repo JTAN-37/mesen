@@ -2,6 +2,7 @@ const express = require("express");
 const https = require("https");
 const app = express();
 const bodyParser = require("body-parser");
+const iso = require(__dirname + "/iso.js");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
@@ -29,18 +30,19 @@ app.post("/", function(req, res) {
 
     response.on('end', function() {
       const newsData = JSON.parse(rawData);
+
+
       var articles = [];
 
-      for (var i = 0; i < 6; i++) {
+      for (var i = 0; i < newsData.articles.length; i++) {
         articles.push(newsData.articles[i]);
       }
 
-      /*res.set("Content-Type", "text/html");
-
-      res.write('<h2>' + articleAuthor + '</h2>');
-      res.write('<h2>' + articleTitle + '</h2>');
-      res.write('<h2>' + articleDesc + '</h2>'); */
-      res.render('results.ejs', {articles: articles});
+      res.render('results.ejs', {
+        articles: articles,
+        isoCodes: iso.isoCodes,
+        countryISO: country
+      });
     });
 
   });

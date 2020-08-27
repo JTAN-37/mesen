@@ -2,43 +2,96 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>mesen</title>
+    <title>NewsGrab</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
   </head>
   <body>
-    <h1>mesen</h1>
+    <h1>NewsGrab</h1>
     <p><i>a quick glance at global headlines.</i></p>
 
     <form action="/" method="post">
       <label for="countryInput">Country Name:</label>
 
       <select id="countryInput" name="countryName">
-        <option value="us">United States</option>
+        <option>Select Country</option>
+        <option value="au">Australia</option>
+        <option value="br">Brazil</option>
+        <option value="ca">Canada</option>
         <option value="cn">China</option>
+        <option value="eg">Egypt</option>
+        <option value="fr">France</option>
+        <option value="de">Germany</option>
+        <option value="gr">Greece</option>
+        <option value="hk">Hong Kong</option>
+        <option value="ie">Ireland</option>
+        <option value="il">Israel</option>
+        <option value="it">Italy</option>
+        <option value="in">India</option>
+        <option value="id">Indonesia</option>
+        <option value="jp">Japan</option>
+        <option value="kr">Korea</option>
+        <option value="my">Malaysia</option>
+        <option value="mx">Mexico</option>
+        <option value="pl">Poland</option>
+        <option value="nl">Netherlands</option>
+        <option value="nz">New Zealand</option>
+        <option value="ng">Nigeria</option>
+        <option value="no">Norway</option>
+        <option value="ru">Russia</option>
+        <option value="sa">Saudi Arabia</option>
+        <option value="sg">Singapore</option>
+        <option value="za">South Africa</option>
+        <option value="ch">Switzerland</option>
+        <option value="tw">Taiwan</option>
+        <option value="th">Thailand</option>
+        <option value="tr">Turkey</option>
+        <option value="ua">Ukraine</option>
+        <option value="gb">United Kingdom</option>
+        <option value="us">United States</option>
+        <option value="ae">United Arab Emirates</option>
+        <option value="ve">Venezuela</option>
       </select>
 
       <button type="submit" class="btn btn-dark">Search</button>
     </form>
 
-  <div class="container">
+    <h2 class="country-title"> Now Viewing: <%= isoCodes[countryISO] %></h2>
+
+  <div class="container-fluid">
     <div class="row">
 
       <% for (var i = 0; i < articles.length; i++) { %>
-        <div class="newscard col-lg-6">
+
+        <div class="newscard">
           <img src=<%= articles[i].urlToImage%>>
-          <h6> <%= articles[i].title %> </h6>
-          <p> <%= articles[i].author %> </p>
-          <p> <%= articles[i].description %> </p>
-          <button type="submit" class="btn btn-dark">
-            <a target="_blank" href=<%=articles[i].url%>>Read</a>
-          </button>
+
+          <div class="article-info">
+            <h2> <%= articles[i].title %> </h2>
+            <p> <%= articles[i].author %> | <i> <%= articles[i].source.name %> </i>  </p>
+            <p> <%= articles[i].description %> </p>
+            <button type="submit" class="btn btn-dark btn-lg">
+              <a target="_blank" href=<%=articles[i].url%>>Read</a>
+            </button>
+          </div>
+
         </div>
       <% } %>
 
       </div>
     </div>
   </div>
+  <script>
+    window.sr = ScrollReveal();
+    sr.reveal('.newscard', {
+      duration: 1500,
+      delay: 200,
+      origin: 'bottom',
+      viewFactor: 0.5
+    });
+  </script>
 
   </body>
 </html>
