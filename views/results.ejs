@@ -19,8 +19,26 @@
       </select>
 
       <button type="submit" class="btn btn-dark">Search</button>
-
     </form>
+
+  <div class="container">
+    <div class="row">
+
+      <% for (var i = 0; i < articles.length; i++) { %>
+        <div class="newscard col-lg-6">
+          <img src=<%= articles[i].urlToImage%>>
+          <h6> <%= articles[i].title %> </h6>
+          <p> <%= articles[i].author %> </p>
+          <p> <%= articles[i].description %> </p>
+          <button type="submit" class="btn btn-dark">
+            <a target="_blank" href=<%=articles[i].url%>>Read</a>
+          </button>
+        </div>
+      <% } %>
+
+      </div>
+    </div>
+  </div>
 
   </body>
 </html>
